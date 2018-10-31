@@ -1,8 +1,16 @@
 # A Prosemirror starter app
 
-This is a simple, minimal starter-app implementing the Prosemirror repo _prosemirror-example-setup_ with the Javacript bundler **RollUp**. This is purely a demonstration project, not a production grade implementation. Say that aloud. Once more.
+### Why?
 
-It combines the conventions and **rollup.config.js** file from the _rollup-starter-app_ repo with the modules located in ther repo _prosemirror-example-setup_.
+From the ProseMirror project owner/docs:
+
+> The fact that ProseMirror isn't distributed as a single, browser-loadable script means that you'll probably want to use some kind of bundler when using it. A bundler is a tool that automatically finds your script's dependencies, and combines them into a single big file that you can easily load from a web page.
+
+He is being kind. You will **have** to use a bundler, so let's save a bit of time, not debate which bundler is best, and just offer a simple, minimal starter-app implementing the Prosemirror repo _prosemirror-example-setup_ with the Javacript bundler **RollUp**. (Webpackers, see _Notes_ below.)
+
+This is purely a demonstration project that combines the common conventions and **rollup.config.js** file from the _rollup-starter-app_ repo with the modules located in the repo _prosemirror-example-setup_.
+
+It is NOT a production grade implementation. Please say that aloud. And again, once more.
 
 ### Use
 

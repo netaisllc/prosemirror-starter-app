@@ -3565,7 +3565,7 @@
 	exports.ContentMatch = ContentMatch;
 	exports.DOMParser = DOMParser;
 	exports.DOMSerializer = DOMSerializer;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist);
@@ -5311,7 +5311,7 @@
 	exports.ReplaceStep = ReplaceStep;
 	exports.ReplaceAroundStep = ReplaceAroundStep;
 	exports.replaceStep = replaceStep;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$1);
@@ -6476,7 +6476,7 @@
 	exports.EditorState = EditorState;
 	exports.Plugin = Plugin;
 	exports.PluginKey = PluginKey;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$2);
@@ -11215,7 +11215,7 @@
 	exports.DecorationSet = DecorationSet;
 	exports.__serializeForClipboard = serializeForClipboard;
 	exports.__parseFromClipboard = parseFromClipboard;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$3);
@@ -11224,176 +11224,6 @@
 	var dist_3$3 = dist$3.DecorationSet;
 	var dist_4$3 = dist$3.__serializeForClipboard;
 	var dist_5$3 = dist$3.__parseFromClipboard;
-
-	var schemaBasic = createCommonjsModule(function (module, exports) {
-
-	Object.defineProperty(exports, '__esModule', { value: true });
-
-
-
-	// :: Object
-	// [Specs](#model.NodeSpec) for the nodes defined in this schema.
-	var nodes = {
-	  // :: NodeSpec The top level document node.
-	  doc: {
-	    content: "block+"
-	  },
-
-	  // :: NodeSpec A plain paragraph textblock. Represented in the DOM
-	  // as a `<p>` element.
-	  paragraph: {
-	    content: "inline*",
-	    group: "block",
-	    parseDOM: [{tag: "p"}],
-	    toDOM: function toDOM() { return ["p", 0] }
-	  },
-
-	  // :: NodeSpec A blockquote (`<blockquote>`) wrapping one or more blocks.
-	  blockquote: {
-	    content: "block+",
-	    group: "block",
-	    defining: true,
-	    parseDOM: [{tag: "blockquote"}],
-	    toDOM: function toDOM() { return ["blockquote", 0] }
-	  },
-
-	  // :: NodeSpec A horizontal rule (`<hr>`).
-	  horizontal_rule: {
-	    group: "block",
-	    parseDOM: [{tag: "hr"}],
-	    toDOM: function toDOM() { return ["hr"] }
-	  },
-
-	  // :: NodeSpec A heading textblock, with a `level` attribute that
-	  // should hold the number 1 to 6. Parsed and serialized as `<h1>` to
-	  // `<h6>` elements.
-	  heading: {
-	    attrs: {level: {default: 1}},
-	    content: "inline*",
-	    group: "block",
-	    defining: true,
-	    parseDOM: [{tag: "h1", attrs: {level: 1}},
-	               {tag: "h2", attrs: {level: 2}},
-	               {tag: "h3", attrs: {level: 3}},
-	               {tag: "h4", attrs: {level: 4}},
-	               {tag: "h5", attrs: {level: 5}},
-	               {tag: "h6", attrs: {level: 6}}],
-	    toDOM: function toDOM(node) { return ["h" + node.attrs.level, 0] }
-	  },
-
-	  // :: NodeSpec A code listing. Disallows marks or non-text inline
-	  // nodes by default. Represented as a `<pre>` element with a
-	  // `<code>` element inside of it.
-	  code_block: {
-	    content: "text*",
-	    marks: "",
-	    group: "block",
-	    code: true,
-	    defining: true,
-	    parseDOM: [{tag: "pre", preserveWhitespace: "full"}],
-	    toDOM: function toDOM() { return ["pre", ["code", 0]] }
-	  },
-
-	  // :: NodeSpec The text node.
-	  text: {
-	    group: "inline"
-	  },
-
-	  // :: NodeSpec An inline image (`<img>`) node. Supports `src`,
-	  // `alt`, and `href` attributes. The latter two default to the empty
-	  // string.
-	  image: {
-	    inline: true,
-	    attrs: {
-	      src: {},
-	      alt: {default: null},
-	      title: {default: null}
-	    },
-	    group: "inline",
-	    draggable: true,
-	    parseDOM: [{tag: "img[src]", getAttrs: function getAttrs(dom) {
-	      return {
-	        src: dom.getAttribute("src"),
-	        title: dom.getAttribute("title"),
-	        alt: dom.getAttribute("alt")
-	      }
-	    }}],
-	    toDOM: function toDOM(node) { return ["img", node.attrs] }
-	  },
-
-	  // :: NodeSpec A hard line break, represented in the DOM as `<br>`.
-	  hard_break: {
-	    inline: true,
-	    group: "inline",
-	    selectable: false,
-	    parseDOM: [{tag: "br"}],
-	    toDOM: function toDOM() { return ["br"] }
-	  }
-	};
-
-	// :: Object [Specs](#model.MarkSpec) for the marks in the schema.
-	var marks = {
-	  // :: MarkSpec A link. Has `href` and `title` attributes. `title`
-	  // defaults to the empty string. Rendered and parsed as an `<a>`
-	  // element.
-	  link: {
-	    attrs: {
-	      href: {},
-	      title: {default: null}
-	    },
-	    inclusive: false,
-	    parseDOM: [{tag: "a[href]", getAttrs: function getAttrs(dom) {
-	      return {href: dom.getAttribute("href"), title: dom.getAttribute("title")}
-	    }}],
-	    toDOM: function toDOM(node) { return ["a", node.attrs] }
-	  },
-
-	  // :: MarkSpec An emphasis mark. Rendered as an `<em>` element.
-	  // Has parse rules that also match `<i>` and `font-style: italic`.
-	  em: {
-	    parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
-	    toDOM: function toDOM() { return ["em"] }
-	  },
-
-	  // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
-	  // also match `<b>` and `font-weight: bold`.
-	  strong: {
-	    parseDOM: [{tag: "strong"},
-	               // This works around a Google Docs misbehavior where
-	               // pasted content will be inexplicably wrapped in `<b>`
-	               // tags with a font-weight normal.
-	               {tag: "b", getAttrs: function (node) { return node.style.fontWeight != "normal" && null; }},
-	               {style: "font-weight", getAttrs: function (value) { return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null; }}],
-	    toDOM: function toDOM() { return ["strong"] }
-	  },
-
-	  // :: MarkSpec Code font mark. Represented as a `<code>` element.
-	  code: {
-	    parseDOM: [{tag: "code"}],
-	    toDOM: function toDOM() { return ["code"] }
-	  }
-	};
-
-	// :: Schema
-	// This schema rougly corresponds to the document schema used by
-	// [CommonMark](http://commonmark.org/), minus the list elements,
-	// which are defined in the [`prosemirror-schema-list`](#schema-list)
-	// module.
-	//
-	// To reuse elements from this schema, extend or read from its
-	// `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
-	var schema = new dist.Schema({nodes: nodes, marks: marks});
-
-	exports.nodes = nodes;
-	exports.marks = marks;
-	exports.schema = schema;
-
-	});
-
-	unwrapExports(schemaBasic);
-	var schemaBasic_1 = schemaBasic.nodes;
-	var schemaBasic_2 = schemaBasic.marks;
-	var schemaBasic_3 = schemaBasic.schema;
 
 	var schemaList = createCommonjsModule(function (module, exports) {
 
@@ -11650,7 +11480,7 @@
 	exports.splitListItem = splitListItem;
 	exports.liftListItem = liftListItem;
 	exports.sinkListItem = sinkListItem;
-
+	//# sourceMappingURL=schema-list.js.map
 	});
 
 	unwrapExports(schemaList);
@@ -11662,6 +11492,176 @@
 	var schemaList_6 = schemaList.splitListItem;
 	var schemaList_7 = schemaList.liftListItem;
 	var schemaList_8 = schemaList.sinkListItem;
+
+	var schemaBasic = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+
+
+	// :: Object
+	// [Specs](#model.NodeSpec) for the nodes defined in this schema.
+	var nodes = {
+	  // :: NodeSpec The top level document node.
+	  doc: {
+	    content: "block+"
+	  },
+
+	  // :: NodeSpec A plain paragraph textblock. Represented in the DOM
+	  // as a `<p>` element.
+	  paragraph: {
+	    content: "inline*",
+	    group: "block",
+	    parseDOM: [{tag: "p"}],
+	    toDOM: function toDOM() { return ["p", 0] }
+	  },
+
+	  // :: NodeSpec A blockquote (`<blockquote>`) wrapping one or more blocks.
+	  blockquote: {
+	    content: "block+",
+	    group: "block",
+	    defining: true,
+	    parseDOM: [{tag: "blockquote"}],
+	    toDOM: function toDOM() { return ["blockquote", 0] }
+	  },
+
+	  // :: NodeSpec A horizontal rule (`<hr>`).
+	  horizontal_rule: {
+	    group: "block",
+	    parseDOM: [{tag: "hr"}],
+	    toDOM: function toDOM() { return ["hr"] }
+	  },
+
+	  // :: NodeSpec A heading textblock, with a `level` attribute that
+	  // should hold the number 1 to 6. Parsed and serialized as `<h1>` to
+	  // `<h6>` elements.
+	  heading: {
+	    attrs: {level: {default: 1}},
+	    content: "inline*",
+	    group: "block",
+	    defining: true,
+	    parseDOM: [{tag: "h1", attrs: {level: 1}},
+	               {tag: "h2", attrs: {level: 2}},
+	               {tag: "h3", attrs: {level: 3}},
+	               {tag: "h4", attrs: {level: 4}},
+	               {tag: "h5", attrs: {level: 5}},
+	               {tag: "h6", attrs: {level: 6}}],
+	    toDOM: function toDOM(node) { return ["h" + node.attrs.level, 0] }
+	  },
+
+	  // :: NodeSpec A code listing. Disallows marks or non-text inline
+	  // nodes by default. Represented as a `<pre>` element with a
+	  // `<code>` element inside of it.
+	  code_block: {
+	    content: "text*",
+	    marks: "",
+	    group: "block",
+	    code: true,
+	    defining: true,
+	    parseDOM: [{tag: "pre", preserveWhitespace: "full"}],
+	    toDOM: function toDOM() { return ["pre", ["code", 0]] }
+	  },
+
+	  // :: NodeSpec The text node.
+	  text: {
+	    group: "inline"
+	  },
+
+	  // :: NodeSpec An inline image (`<img>`) node. Supports `src`,
+	  // `alt`, and `href` attributes. The latter two default to the empty
+	  // string.
+	  image: {
+	    inline: true,
+	    attrs: {
+	      src: {},
+	      alt: {default: null},
+	      title: {default: null}
+	    },
+	    group: "inline",
+	    draggable: true,
+	    parseDOM: [{tag: "img[src]", getAttrs: function getAttrs(dom) {
+	      return {
+	        src: dom.getAttribute("src"),
+	        title: dom.getAttribute("title"),
+	        alt: dom.getAttribute("alt")
+	      }
+	    }}],
+	    toDOM: function toDOM(node) { return ["img", node.attrs] }
+	  },
+
+	  // :: NodeSpec A hard line break, represented in the DOM as `<br>`.
+	  hard_break: {
+	    inline: true,
+	    group: "inline",
+	    selectable: false,
+	    parseDOM: [{tag: "br"}],
+	    toDOM: function toDOM() { return ["br"] }
+	  }
+	};
+
+	// :: Object [Specs](#model.MarkSpec) for the marks in the schema.
+	var marks = {
+	  // :: MarkSpec A link. Has `href` and `title` attributes. `title`
+	  // defaults to the empty string. Rendered and parsed as an `<a>`
+	  // element.
+	  link: {
+	    attrs: {
+	      href: {},
+	      title: {default: null}
+	    },
+	    inclusive: false,
+	    parseDOM: [{tag: "a[href]", getAttrs: function getAttrs(dom) {
+	      return {href: dom.getAttribute("href"), title: dom.getAttribute("title")}
+	    }}],
+	    toDOM: function toDOM(node) { return ["a", node.attrs] }
+	  },
+
+	  // :: MarkSpec An emphasis mark. Rendered as an `<em>` element.
+	  // Has parse rules that also match `<i>` and `font-style: italic`.
+	  em: {
+	    parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
+	    toDOM: function toDOM() { return ["em"] }
+	  },
+
+	  // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
+	  // also match `<b>` and `font-weight: bold`.
+	  strong: {
+	    parseDOM: [{tag: "strong"},
+	               // This works around a Google Docs misbehavior where
+	               // pasted content will be inexplicably wrapped in `<b>`
+	               // tags with a font-weight normal.
+	               {tag: "b", getAttrs: function (node) { return node.style.fontWeight != "normal" && null; }},
+	               {style: "font-weight", getAttrs: function (value) { return /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null; }}],
+	    toDOM: function toDOM() { return ["strong"] }
+	  },
+
+	  // :: MarkSpec Code font mark. Represented as a `<code>` element.
+	  code: {
+	    parseDOM: [{tag: "code"}],
+	    toDOM: function toDOM() { return ["code"] }
+	  }
+	};
+
+	// :: Schema
+	// This schema rougly corresponds to the document schema used by
+	// [CommonMark](http://commonmark.org/), minus the list elements,
+	// which are defined in the [`prosemirror-schema-list`](#schema-list)
+	// module.
+	//
+	// To reuse elements from this schema, extend or read from its
+	// `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
+	var schema = new dist.Schema({nodes: nodes, marks: marks});
+
+	exports.nodes = nodes;
+	exports.marks = marks;
+	exports.schema = schema;
+	//# sourceMappingURL=schema-basic.js.map
+	});
+
+	unwrapExports(schemaBasic);
+	var schemaBasic_1 = schemaBasic.nodes;
+	var schemaBasic_2 = schemaBasic.marks;
+	var schemaBasic_3 = schemaBasic.schema;
 
 	var base = {
 	  8: "Backspace",
@@ -11892,7 +11892,7 @@
 
 	exports.keymap = keymap;
 	exports.keydownHandler = keydownHandler;
-
+	//# sourceMappingURL=keymap.js.map
 	});
 
 	unwrapExports(keymap_1);
@@ -12561,7 +12561,7 @@
 	exports.redo = redo;
 	exports.undoDepth = undoDepth;
 	exports.redoDepth = redoDepth;
-
+	//# sourceMappingURL=history.js.map
 	});
 
 	unwrapExports(history_1);
@@ -13236,7 +13236,7 @@
 	exports.pcBaseKeymap = pcBaseKeymap;
 	exports.macBaseKeymap = macBaseKeymap;
 	exports.baseKeymap = baseKeymap;
-
+	//# sourceMappingURL=commands.js.map
 	});
 
 	unwrapExports(commands);
@@ -13387,7 +13387,7 @@
 	};
 
 	exports.dropCursor = dropCursor;
-
+	//# sourceMappingURL=dropcursor.js.map
 	});
 
 	unwrapExports(dropcursor);
@@ -13585,7 +13585,7 @@
 
 	exports.gapCursor = gapCursor;
 	exports.GapCursor = GapCursor;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$5);
@@ -14430,7 +14430,7 @@
 	exports.wrapItem = wrapItem;
 	exports.blockTypeItem = blockTypeItem;
 	exports.menuBar = menuBar;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$6);
@@ -14622,7 +14622,7 @@
 	exports.smartQuotes = smartQuotes;
 	exports.wrappingInputRule = wrappingInputRule;
 	exports.textblockTypeInputRule = textblockTypeInputRule;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$7);
@@ -15267,7 +15267,7 @@
 	exports.buildKeymap = buildKeymap;
 	exports.buildInputRules = buildInputRules;
 	exports.exampleSetup = exampleSetup;
-
+	//# sourceMappingURL=index.js.map
 	});
 
 	unwrapExports(dist$8);
@@ -15276,7 +15276,7 @@
 	var dist_3$6 = dist$8.buildInputRules;
 	var dist_4$6 = dist$8.exampleSetup;
 
-	// Lifted straight from https://prosemirror.net/examples/basic/
+	// Taken straight from https://prosemirror.net/examples/basic/
 
 	// Mix the nodes from prosemirror-schema-list into the basic schema to
 	// create a schema with list support.
@@ -15285,11 +15285,37 @@
 	    marks: schemaBasic_3.spec.marks
 	});
 
+	// 1) Put 'view' on window object just for easy inspection/debugging
+	// 2) '#editor' is the ID of the DOM element that will host the DOM.
 	window.view = new dist_1$3(document.querySelector("#editor"), {
+
 	    state: dist_7$2.create({
+
+	        // Here the document state is read from the DOM, the HTML markup on
+	        // the simple file, public/index.html page that contains the editor;
+	        // '#content' is the ID of the DOM element that has your pre-prepared content
+	        // to be injected into the editor.  The only reason this is done in this
+	        // demo project is to prevent you from starting with a blank editor.
 	        doc: dist_12.fromSchema(mySchema).parse(document.querySelector("#content")),
+
+	        // Instantiate all the plugins to make a very basic editor
 	        plugins: dist_4$6({schema: mySchema})
-	    })
+
+	    })//,
+
+	    // The rest is commented out as you have a basic editor.
+	    // This section uses a sort of 'wiretap' into ProseMirror's event flow to
+	    // let you see inside the basic editor model.
+
+	    //dispatchTransaction( transaction ) {
+	        // console.log("Document size went from", transaction.before.content.size,
+	        //            "to", transaction.doc.content.size)
+
+	        // console.log( 'State', JSON.stringify( this.state.toJSON(), null, 4 ))
+
+	        // let newState = window.view.state.apply(transaction)
+	        //window.view.updateState(newState)
+	    //}
 	});
 
 }());

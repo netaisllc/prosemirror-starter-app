@@ -8,49 +8,61 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	
 	<style>
-		/* this styling is 100% frivilous; it's not associated with ProseMirror */
-		a{ cursor: pointer; color: dodgerblue; }
-		img { 
+		/* All this styling is extra fluff for the demo page; 
+		   it's not part of ProseMirror */
+		a { cursor: pointer; color: dodgerblue; }
+		img,
+		img:hover { 
 			border-radius: 50%;
 			box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
+			cursor: move;
 		}
 		.container { width: 60vw; }
-		.description {
-			margin: 20px 0;
-			width: 60vw;
+		.description { margin: 20px 0; width: 60vw;
 		}
 		.description p {
 			background-color:azure;
+			border-radius: 3px;
 			color: #565656;
 			font-family: Arial, Helvetica, sans-serif;
 			font-size: 14px;
 			margin: 10px 0 0 0;
-			padding: 24px;
+			padding: 10px;
 		}
 	</style>
 
 </head>
 <body>
-	<h1>A proseMirror-starter-app</h1>
+	<h1>A ProseMirror-starter-app</h1>
+
+		<!-- Pure fluff for the demo page -->
 		<div class="description">
-			<p>This is a simple, minimal starter-app implementing the Prosemirror repo <a href="https://github.com/ProseMirror/prosemirror-example-setup">prosemirror-example-setup</a> with the 
-			Javascript bundler <a href="https://www.rollupjs.com/guide/en">RollUp</a>.<br/>
-			This is purely a demonstration project, not a production grade implementation.<br/>
-			Say that aloud. Once more.</p>
-		</div>			
+			<p>This is a simple, minimal starter-app implementing the ProseMirror repo 
+			<a href="https://github.com/ProseMirror/prosemirror-example-setup">prosemirror-example-setup</a> with the 
+			Javascript bundler <a href="https://www.rollupjs.com/guide/en">RollUp</a>.</p>
+			<p>This is purely a demonstration project, not a production grade implementation. For example, to demonstrate image 
+			support, we pull a little random image from an external source that can be slow to resolve sometimes.</p>
+			<p>So, for learning only. Not prod. Say that aloud. Once more.</p>
+		</div>
+		<!-- /fluff -->	
+
 		<div class="container">
-			<!-- lifted straight from https://prosemirror.net/examples/basic/-->
-        	<div id="editor" style="margin-bottom: 23px;"></div>
+			<!-- Taken straight from https://prosemirror.net/examples/basic/-->
+			<!-- Here you implement the host element for the editor -->
+			<div id="editor" style="margin-bottom: 23px;"></div>
+			<!-- Here you implement the element to store the HTML representation of your content -->
         	<div id="content" style="display: none;">
           		<h3>Hello ProseMirror</h3>
-				  <p>This is editable text. You can focus it and start typing.</p>
-				  <hr/>
-          		<p>To apply styling, you can select a piece of text and manipulate its styling from the menu. The basic schema supports <em>emphasis</em>, <strong>strong text</strong>, <a href="http://marijnhaverbeke.nl/blog">links</a>, <code>code font</code>, and <img src="http://lorempixel.com/40/40"/> images.</p>
-          		<p>Block-level structure can be manipulated with key bindings (try ctrl-shift-2 to create a level 2 heading, or enter in an empty textblock to exit the parent block), or through the menu.</p>
-          		<p>Try using the “list” item in the menu to wrap this paragraph in a numbered list.</p>
+				  	<p>This is editable text. You can focus it and start typing.</p>
+				  	<hr/>
+          			<p>To apply styling, you can select a piece of text and manipulate its styling from the menu. The basic schema supports <em>emphasis</em>, <strong>strong text</strong>, <a href="http://marijnhaverbeke.nl/blog">links</a>, <code>code font</code>, as well as <img src="http://lorempixel.com/40/40"/> images.</p>
+          			<p>Block-level structure can be manipulated with key bindings (try ctrl-shift-2 to create a level 2 heading, or enter in an empty textblock to exit the parent block), or through the menu.</p>
+				  	<p>Try using the “list” item in the menu to wrap this paragraph in a numbered list.</p>
+				  	<p>Or grab the image (once it loads) and relocate it within the editor workspace.</p>
 			</div>
-			<!-- /lift -->
+			<!-- /end take -->
 		  </div>
+		  
 	<!-- We follow the RollUp convention of 'bundle.js' -->
 	<script src='bundle.js'></script>
 </body>
